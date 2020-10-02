@@ -1,0 +1,19 @@
+.score{
+    box-sizing: content-box;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    top: 30px;
+    right: 60px;
+    width: 180px;
+    height: 180px;
+    border: black solid 3px;
+    font-weight: bold;
+    
+}
+.score span{
+    width: 100%;
+    height: 45px;
+    border: rgb(42, 55, 65) solid 1px;
+    line-height: 250%;
+}

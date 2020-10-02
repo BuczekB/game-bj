@@ -1,0 +1,26 @@
+.cards{
+    
+}
+.firstCardsp{
+    width: 20vh;
+    height: 62px;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    display: flex;
+    font-size: 12px;
+    position: absolute;
+    justify-content: center;
+    
+}
+.firstCardsd{
+    width: 20vh;
+    height: 62px;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    position: absolute;
+    display: flex;
+    font-size: 12px;
+    justify-content: center;
+}

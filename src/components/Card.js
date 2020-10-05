@@ -3,7 +3,7 @@ import '../style/card.css'
 
 const Card = (props) => {
 
-    if (false) {
+    if (true) {
 
 
         return (

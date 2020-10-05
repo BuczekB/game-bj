@@ -6,8 +6,8 @@ const Buttons = (props) => {
 
     return (
         <div>
-            <button  >Card</button>
-            <button  >Stay</button>
+            <button onClick={props.test} >Card</button>
+            <button onClick={props.log}  >Stay</button>
         </div>
     )
 }

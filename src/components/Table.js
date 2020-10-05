@@ -2,7 +2,7 @@ import React from 'react';
 
 import '../style/table.css';
 
-const Table = () => {
+const Table = (props) => {
     return (
         <div className='table'>
 

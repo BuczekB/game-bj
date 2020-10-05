@@ -1,7 +1,5 @@
-.cards{
-    
-}
-.firstCardsp{
+
+.CardsForPlayer{
     width: 20vh;
     height: 62px;
     top: 60%;
@@ -12,8 +10,9 @@
     position: absolute;
     justify-content: center;
     
+    
 }
-.firstCardsd{
+.CardsForDealer{
     width: 20vh;
     height: 62px;
     top: 40%;

@@ -17,12 +17,12 @@ const FirstCards = () => {
 
     return (
         <div className='cards'>
-            <div className='firstCardsp'>
+            <div className='CardsForPlayer'>
 
 
 
             </div>
-            <div className='firstCardsd'>
+            <div className='CardsForDealer'>
 
 
             </div>

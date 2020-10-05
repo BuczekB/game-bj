@@ -8,6 +8,7 @@ import Table from './Table';
 import Value from './Value';
 import Score from './Score';
 import Buttons from './Buttons';
+import PlaceForCards from './PlaceForCards';
 import Card from './Card';
 
 const card = [{ card: '1karo', value: 1 }, { card: '2karo', value: 2 }, { card: '3karo', value: 3 },
@@ -32,13 +33,43 @@ const card = [{ card: '1karo', value: 1 }, { card: '2karo', value: 2 }, { card: 
 
 
 class App extends Component {
+
+  state = {
+    cards: [],
+  };
+
+  shufflingCards = () => {
+    const newCardList = card.map(card => card);
+    const cards = [];
+    for (let i = 0; i < newCardList.length; i++) {
+      const number = Math.floor(Math.random() * newCardList.length)
+      cards.push(newCardList[number])
+      newCardList.slice({ number }, 1)
+
+    }
+    this.setState({
+      cards: cards,
+    })
+
+  }
+
+  log = () => {
+    console.log(this.state.cards);
+  }
+
   render() {
     return (
       <div className='app'>
-        <Table></Table>
+        <Table
+          cards={this.state.cards}
+        />
+        <PlaceForCards></PlaceForCards>
         <Value></Value>
         <Score></Score>
-        <Buttons></Buttons>
+        <Buttons
+          test={this.shufflingCards}
+          log={this.log}
+        />
       </div>
     )
   }

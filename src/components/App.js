@@ -36,6 +36,16 @@ class App extends Component {
 
   state = {
     cards: [],
+    firstThirdCards: [],
+    playerCards: [],
+    dealerCards: [],
+    counter: 0,
+    pointDealer: 0,
+    pointPlayer: 0,
+    addValue: true,
+    endGame: false,
+    money: 1000,
+    value: 0,
   };
 
   shufflingCards = () => {
@@ -47,28 +57,157 @@ class App extends Component {
       newCardList.slice({ number }, 1)
 
     }
+
     this.setState({
       cards: cards,
     })
 
-  }
+    setTimeout(this.giveFirstThirdCard, 500)
 
-  log = () => {
-    console.log(this.state.cards);
+  }
+  giveFirstThirdCard = () => {
+
+    const cards = this.state.cards
+    const firstThirdCards = []
+    for (let i = 0; i < 3; i++) {
+      firstThirdCards.push(cards[i])
+    }
+    const pointsDealer = firstThirdCards[1].value;
+    const pointsPlayer = firstThirdCards[0].value + firstThirdCards[2].value;
+
+    this.setState({
+      firstThirdCards: firstThirdCards,
+      counter: 3,
+      pointDealer: pointsDealer,
+      pointPlayer: pointsPlayer,
+
+    })
+  }
+  onlyOneCardPlayerAndPoints = (prevState) => {
+
+    const cards = this.state.cards;
+    const counter = this.state.counter;
+    const playerCards = this.state.playerCards;
+    playerCards.push(cards[counter]);
+    const value = cards[counter].value;
+    const valueSum = value + this.state.pointPlayer;
+
+    this.setState({
+      playerCards: [...playerCards],
+      counter: counter + 1,
+      pointPlayer: valueSum,
+    })
+  }
+  onlyOneCardDealerAndPoints = () => {
+
+    const cards = this.state.cards;
+    let counter = this.state.counter;
+    const dealerCards = this.state.dealerCards;
+    let valueSum = this.state.pointDealer;
+    while (valueSum <= 15) {
+      dealerCards.push(cards[counter]);
+      let value = cards[counter].value;
+      valueSum += value
+      counter += 1;
+    }
+
+
+    this.setState({
+      dealerCards: [...dealerCards],
+      counter: counter + 1,
+      pointDealer: valueSum,
+    })
+  }
+  pass = () => {
+    if (this.state.pointPlayer > 21) {
+      this.setState({
+        money: this.state.money - this.state.value,
+      })
+      return
+    }
+    if (this.state.pointPlayer < 22) {
+      this.onlyOneCardDealerAndPoints()
+    }
+    this.setState({
+      endGame: true,
+    })
+    setTimeout(this.winLoseDraw, 100)
+  }
+  winLoseDraw = () => {
+    if (this.state.endGame) {
+      if (this.state.pointDealer > 21) {
+        this.setState({
+          money: this.state.money + this.state.value,
+        })
+        return
+      }
+      if (this.state.pointDealer > this.state.pointPlayer) {
+        this.setState({
+          money: this.state.money - this.state.value,
+        })
+        return
+      }
+      if (this.state.pointDealer < this.state.pointPlayer) {
+        this.setState({
+          money: this.state.money + this.state.value,
+        })
+        return
+      }
+      if (this.state.pointDealer === this.state.pointPlayer) {
+        this.setState({
+          money: this.state.money,
+        })
+        return
+      }
+    }
+
+  }
+  choiceValue = (money) => {
+    this.setState({
+      value: money,
+    })
+    this.shufflingCards()
+  }
+  reset = () => {
+
+    this.setState({
+      cards: [],
+      firstThirdCards: [],
+      playerCards: [],
+      dealerCards: [],
+      counter: 0,
+      pointDealer: 0,
+      pointPlayer: 0,
+      addValue: true,
+      endGame: false,
+      value: 0,
+    })
+
+
   }
 
   render() {
     return (
       <div className='app'>
-        <Table
-          cards={this.state.cards}
+        <Table />
+        <PlaceForCards
+          firstCards={this.state.firstThirdCards}
+          playerCards={this.state.playerCards}
+          dealerCards={this.state.dealerCards}
         />
-        <PlaceForCards></PlaceForCards>
-        <Value></Value>
-        <Score></Score>
+        <Value
+          choiceValue={this.choiceValue}
+        />
+        <Score
+          pointsPlayer={this.state.pointPlayer}
+          pointsDealer={this.state.pointDealer}
+          money={this.state.money}
+          value={this.state.value}
+        />
+        <button onClick={this.pass}></button>
         <Buttons
-          test={this.shufflingCards}
-          log={this.log}
+          giveFirstThirdCard={this.onlyOneCardPlayerAndPoints}
+          onlyOneCardPlayer={this.reset}
         />
       </div>
     )

@@ -5,15 +5,18 @@
     flex-direction: column;
     top: 30px;
     right: 60px;
-    width: 180px;
-    height: 180px;
+    width: 15vw;
+    height: 32vh;
     border: black solid 3px;
     font-weight: bold;
-    
+   
 }
 .score span{
     width: 100%;
-    height: 45px;
-    border: rgb(42, 55, 65) solid 1px;
-    line-height: 250%;
+    height: 8vh;
+    border-bottom: black 1px solid;
+    display: flex;
+    justify-content: center;
+   align-items: center;
+    
 }

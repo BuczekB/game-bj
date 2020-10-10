@@ -46,6 +46,7 @@ class App extends Component {
     endGame: false,
     money: 1000,
     value: 0,
+    active: false,
   };
 
   shufflingCards = () => {
@@ -123,6 +124,7 @@ class App extends Component {
       this.setState({
         money: this.state.money - this.state.value,
       })
+      setTimeout(this.reset, 1000)
       return
     }
     if (this.state.pointPlayer < 22) {
@@ -139,24 +141,28 @@ class App extends Component {
         this.setState({
           money: this.state.money + this.state.value,
         })
+        setTimeout(this.reset, 1000)
         return
       }
       if (this.state.pointDealer > this.state.pointPlayer) {
         this.setState({
           money: this.state.money - this.state.value,
         })
+        setTimeout(this.reset, 1000)
         return
       }
       if (this.state.pointDealer < this.state.pointPlayer) {
         this.setState({
           money: this.state.money + this.state.value,
         })
+        setTimeout(this.reset, 1000)
         return
       }
       if (this.state.pointDealer === this.state.pointPlayer) {
         this.setState({
           money: this.state.money,
         })
+        setTimeout(this.reset, 1000)
         return
       }
     }
@@ -165,6 +171,7 @@ class App extends Component {
   choiceValue = (money) => {
     this.setState({
       value: money,
+      active: true,
     })
     this.shufflingCards()
   }
@@ -181,6 +188,7 @@ class App extends Component {
       addValue: true,
       endGame: false,
       value: 0,
+      active: false,
     })
 
 
@@ -197,6 +205,7 @@ class App extends Component {
         />
         <Value
           choiceValue={this.choiceValue}
+          active={this.state.active}
         />
         <Score
           pointsPlayer={this.state.pointPlayer}
@@ -204,10 +213,10 @@ class App extends Component {
           money={this.state.money}
           value={this.state.value}
         />
-        <button onClick={this.pass}></button>
         <Buttons
+          active={this.state.active}
           giveFirstThirdCard={this.onlyOneCardPlayerAndPoints}
-          onlyOneCardPlayer={this.reset}
+          onlyOneCardPlayer={this.pass}
         />
       </div>
     )

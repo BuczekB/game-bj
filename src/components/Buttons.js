@@ -4,12 +4,13 @@ import '../style/buttons.css';
 
 const Buttons = (props) => {
 
+    const active = props.active;
 
 
     return (
-        <div>
-            <button onClick={props.giveFirstThirdCard}  >Stay</button>
-            <button onClick={props.onlyOneCardPlayer}>test</button>
+        <div className={active ? 'active' : 'noActive'}>
+            <button onClick={props.giveFirstThirdCard}><p>Card</p></button>
+            <button onClick={props.onlyOneCardPlayer}><p>Pass</p></button>
         </div>
     )
 }

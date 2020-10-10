@@ -4,7 +4,7 @@ import '../style/value.css';
 
 const Value = (props) => {
 
-
+    const active = props.active;
 
     const value5 = () => {
         const money = 5
@@ -25,11 +25,15 @@ const Value = (props) => {
 
 
     return (
-        <div className='tableValue'>
-            <div className='value' onClick={value5}>5$</div>
-            <div className='value' onClick={value10}>10$</div>
-            <div className='value' onClick={value25}>25$</div>
-            <div className='value' onClick={value100}>100$</div>
+        <div className={active ? 'noActive' : 'active'}>
+            <div className='tableValue' >
+
+                <div className='value' onClick={value5}><p>5$</p></div>
+                <div className='value' onClick={value10}><p>10$</p></div>
+                <div className='value' onClick={value25}><p>25$</p></div>
+                <div className='value' onClick={value100}><p>100$</p></div>
+
+            </div>
         </div>
     )
 }

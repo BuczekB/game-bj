@@ -1,7 +1,7 @@
 
 .CardsForPlayer{
-    width: 20vh;
-    height: 62px;
+    width: 40vh;
+    height: 11vh;
     top: 60%;
     left: 50%;
     transform: translate(-50%,-50%);
@@ -9,11 +9,11 @@
     font-size: 12px;
     position: absolute;
     justify-content: center;
-    
+    align-items: center;
 }
 .CardsForDealer{
-    width: 20vh;
-    height: 62px;
+    width: 40vh;
+    height: 11vh;
     top: 40%;
     left: 50%;
     transform: translate(-50%,-50%);
@@ -21,4 +21,5 @@
     display: flex;
     font-size: 12px;
     justify-content: center;
+    align-items: center;
 }

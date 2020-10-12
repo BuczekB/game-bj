@@ -1,5 +1,5 @@
 .card{
-    width: 35px;
+    width: 3vw;
     height: 10vh;
     border: 1px solid black;
     color: white;
@@ -9,5 +9,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    font-size: 18px;
 }
 

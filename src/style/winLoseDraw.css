@@ -1,0 +1,58 @@
+
+.win span {
+    font-size: 70px;
+    font-weight: bold;
+}
+.win{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 15vw;
+    height: 15vw;
+    border: 5px solid green;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(0, 0, 0) ;
+    color: green;
+    opacity: 0.4;
+}
+.lose span {
+    font-size: 70px;
+    font-weight: bold;
+}
+.lose{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 15vw;
+    height: 15vw;
+    border: 5px solid red;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(0, 0, 0) ;
+    color: red;
+    opacity: 0.4;
+}
+.draw span {
+    font-size: 70px;
+    font-weight: bold;
+}
+.draw{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 15vw;
+    height: 15vw;
+    border: 5px solid blue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(0, 0, 0) ;
+    color: blue;
+    opacity: 0.4;
+}

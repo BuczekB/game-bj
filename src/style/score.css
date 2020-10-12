@@ -20,6 +20,28 @@
    align-items: center;
     
 }
+@media (max-width: 1400px){
+    .score{
+        box-sizing: content-box;
+        position: absolute;
+        display: flex;
+        flex-direction: row;
+        width: 60vw;
+        height: 8vh;
+        top: 10%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+    }
+    .score span{
+        width: 100%;
+        height: 8vh;
+        border-bottom: black 1px solid;
+        display: flex;
+        justify-content: center;
+       align-items: center;
+        
+    }
+}
 @media (max-width: 1024px){
     .score{
         box-sizing: content-box;
@@ -42,18 +64,7 @@
         
     }
 }
-@media (max-width: 900px){
-    .score{
-        width: 44vw;
-        height: 8vh;
-    }
-    .score span{
-        width: 100%;
-        height: 8vh;
-       font-size: 10px ;
-        
-    }
-}
+
 @media (max-width: 900px){
     .score{
         border: black solid 2px;

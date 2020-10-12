@@ -10,6 +10,7 @@ import Score from './Score';
 import Buttons from './Buttons';
 import PlaceForCards from './PlaceForCards';
 import Card from './Card';
+import WinLoseDraw from './WinLoseDraw';
 
 const card = [{ card: '1karo', value: 1 }, { card: '2karo', value: 2 }, { card: '3karo', value: 3 },
 { card: '4karo', value: 4 }, { card: '5karo', value: 5 }, { card: '6karo', value: 6 }, { card: '7karo', value: 7 },
@@ -47,6 +48,7 @@ class App extends Component {
     money: 1000,
     value: 0,
     active: false,
+    winLoseDraw: '',
   };
 
   shufflingCards = () => {
@@ -123,8 +125,10 @@ class App extends Component {
     if (this.state.pointPlayer > 21) {
       this.setState({
         money: this.state.money - this.state.value,
+        winLoseDraw: 'lose',
       })
-      setTimeout(this.reset, 1000)
+      setTimeout(this.reset, 2000)
+
       return
     }
     if (this.state.pointPlayer < 22) {
@@ -133,36 +137,47 @@ class App extends Component {
     this.setState({
       endGame: true,
     })
-    setTimeout(this.winLoseDraw, 100)
+    setTimeout(this.winLoseDraw, 2000)
+
+
   }
   winLoseDraw = () => {
     if (this.state.endGame) {
       if (this.state.pointDealer > 21) {
         this.setState({
           money: this.state.money + this.state.value,
+          winLoseDraw: 'win',
         })
-        setTimeout(this.reset, 1000)
+        setTimeout(this.reset, 2000)
+
         return
       }
       if (this.state.pointDealer > this.state.pointPlayer) {
         this.setState({
           money: this.state.money - this.state.value,
+          winLoseDraw: 'lose',
         })
-        setTimeout(this.reset, 1000)
+        setTimeout(this.reset, 2000)
+
         return
       }
       if (this.state.pointDealer < this.state.pointPlayer) {
         this.setState({
           money: this.state.money + this.state.value,
+          winLoseDraw: 'win',
         })
-        setTimeout(this.reset, 1000)
+        setTimeout(this.reset, 2000)
+
         return
       }
       if (this.state.pointDealer === this.state.pointPlayer) {
         this.setState({
           money: this.state.money,
+          winLoseDraw: 'draw',
         })
-        setTimeout(this.reset, 1000)
+        setTimeout(this.reset, 2000)
+
+
         return
       }
     }
@@ -174,6 +189,7 @@ class App extends Component {
       active: true,
     })
     this.shufflingCards()
+    console.log(this.state.winLoseDraw);
   }
   reset = () => {
 
@@ -189,10 +205,14 @@ class App extends Component {
       endGame: false,
       value: 0,
       active: false,
+      winLoseDraw: '',
     })
 
 
   }
+
+
+
 
   render() {
     return (
@@ -217,6 +237,9 @@ class App extends Component {
           active={this.state.active}
           giveFirstThirdCard={this.onlyOneCardPlayerAndPoints}
           onlyOneCardPlayer={this.pass}
+        />
+        <WinLoseDraw
+          winLoseDraw={this.state.winLoseDraw}
         />
       </div>
     )

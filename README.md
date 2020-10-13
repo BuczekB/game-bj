@@ -1,5 +1,9 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Game BJ
+
+Simple card game. Simple card game if u don't know rules check them in google.
+
 ## Available Scripts
 
 In the project directory, you can run:

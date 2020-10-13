@@ -10,7 +10,7 @@ const Buttons = (props) => {
     return (
         <div className={active ? 'active' : 'noActive'}>
             <button onClick={props.giveFirstThirdCard}><p>Card</p></button>
-            <button onClick={props.onlyOneCardPlayer}><p>Pass</p></button>
+            <button onClick={props.onlyOneCardPlayer}><p>Stand</p></button>
         </div>
     )
 }

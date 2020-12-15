@@ -144,6 +144,7 @@ class App extends Component {
   winLoseDraw = () => {
     if (this.state.endGame) {
       if (this.state.pointDealer > 21) {
+
         this.setState({
           money: this.state.money + this.state.value,
           winLoseDraw: 'win',
@@ -247,5 +248,7 @@ class App extends Component {
 
 
 }
+
+
 
 export default App;

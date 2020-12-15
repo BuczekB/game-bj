@@ -38,19 +38,25 @@ button:nth-child(2){
 .noActive{
     display: none;
 }
-@media (max-width: 1024px){
+
+
+@media (max-width: 900px){
+   button{
+    width: 26vw;
+    height: 12vh;
+    font-size:6vh ;
+   }
+   button:nth-child(1){
+    left: 35%;
     
 }
-@media (max-width: 900px){
-   
-}
-@media (max-width: 900px){
-   
-}
-@media (max-width: 780px){
+button:nth-child(2){
+    left: 65%;
     
 }
-@media (max-width: 580px){
+}
+
+@media (max-width: 600px){
     button{
         background: none;
         color: #338033;

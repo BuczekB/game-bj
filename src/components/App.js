@@ -107,7 +107,7 @@ class App extends Component {
     let counter = this.state.counter;
     const dealerCards = this.state.dealerCards;
     let valueSum = this.state.pointDealer;
-    while (valueSum <= 15) {
+    while (valueSum <= 16) {
       dealerCards.push(cards[counter]);
       let value = cards[counter].value;
       valueSum += value

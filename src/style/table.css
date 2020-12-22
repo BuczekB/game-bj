@@ -8,6 +8,7 @@
     transform: translate(-50%,-50%);
     border-radius: 50%;
     border: solid 6px black;
+    
 }
 .player{
     width: 7vw;
@@ -20,6 +21,7 @@
     transform: translate(-50%,-95%);
     border-radius: 50%;
     line-height: 500%;
+    
 }
 .player:nth-child(2){
     width: 7vw;

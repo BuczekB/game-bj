@@ -2,7 +2,7 @@
 .CardsForPlayer{
     width: 40vh;
     height: 11vh;
-    top: 60%;
+    top: 65%;
     left: 50%;
     transform: translate(-50%,-50%);
     display: flex;
@@ -14,7 +14,7 @@
 .CardsForDealer{
     width: 40vh;
     height: 11vh;
-    top: 40%;
+    top: 35%;
     left: 50%;
     transform: translate(-50%,-50%);
     position: absolute;

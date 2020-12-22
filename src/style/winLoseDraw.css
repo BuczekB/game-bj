@@ -97,18 +97,18 @@
 }
 @media (max-width: 600px){
     .win{
-        width: 40vw;
-        height: 35vw;
+        width: 42vw;
+        height: 37vw;
         border: 5px solid green;
     }
     .lose{
-        width: 40vw;
-        height: 35vw;
+        width: 42vw;
+        height: 37vw;
         border: 5px solid red;
     }
     .draw{
-        width: 40vw;
-        height: 35vw;
+        width: 42vw;
+        height: 37vw;
         border: 5px solid blue;
         
     }

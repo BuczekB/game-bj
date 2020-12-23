@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/game-bj/static/css/main.f9ba4688.chunk.css",
+    "main.css": "/game-bj/static/css/main.404110ec.chunk.css",
     "main.js": "/game-bj/static/js/main.938683e6.chunk.js",
     "main.js.map": "/game-bj/static/js/main.938683e6.chunk.js.map",
     "runtime-main.js": "/game-bj/static/js/runtime-main.d8deb963.js",
@@ -8,15 +8,15 @@
     "static/js/2.89a9d0d1.chunk.js": "/game-bj/static/js/2.89a9d0d1.chunk.js",
     "static/js/2.89a9d0d1.chunk.js.map": "/game-bj/static/js/2.89a9d0d1.chunk.js.map",
     "index.html": "/game-bj/index.html",
-    "precache-manifest.35a1a1202b470e191410e74e1315d0c3.js": "/game-bj/precache-manifest.35a1a1202b470e191410e74e1315d0c3.js",
+    "precache-manifest.e749eb17a53846229f090337a368d9d4.js": "/game-bj/precache-manifest.e749eb17a53846229f090337a368d9d4.js",
     "service-worker.js": "/game-bj/service-worker.js",
-    "static/css/main.f9ba4688.chunk.css.map": "/game-bj/static/css/main.f9ba4688.chunk.css.map",
+    "static/css/main.404110ec.chunk.css.map": "/game-bj/static/css/main.404110ec.chunk.css.map",
     "static/js/2.89a9d0d1.chunk.js.LICENSE.txt": "/game-bj/static/js/2.89a9d0d1.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.d8deb963.js",
     "static/js/2.89a9d0d1.chunk.js",
-    "static/css/main.f9ba4688.chunk.css",
+    "static/css/main.404110ec.chunk.css",
     "static/js/main.938683e6.chunk.js"
   ]
 }

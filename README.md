@@ -1,8 +1,10 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Game BJ
+## You can watch this project without no download on GitHub Pages on profile
 
-Simple card game. Simple card game if u don't know rules check them in google.
+## BLACKJACK RULES
+
+The goal of BJ is to amount your card values as near to 21 as possible without exceeding or 'busting' it.
 
 ## Available Scripts
 

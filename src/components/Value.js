@@ -6,6 +6,7 @@ const Value = (props) => {
 
     const active = props.active;
 
+
     const value5 = () => {
         const money = 5
         props.choiceValue(money)

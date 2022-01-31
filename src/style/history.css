@@ -1,0 +1,68 @@
+
+
+.historyTable{
+    width: 30vw;
+    height: 100vh;
+    position: absolute;
+    right: 0;
+    top: 0;
+    overflow-y: scroll;
+    opacity: 1;
+    
+}
+
+.boxOFF{
+    opacity: 0;
+}
+
+
+
+.historyTableOff{
+    width: 30vw;
+    height: 100vh;
+    background-color: rgba(128, 128, 128, 0.5);
+    position: absolute;
+    right: 0;
+    top: 0;
+    overflow-y: scroll;
+    opacity: 0;
+}
+
+
+
+
+
+.red{
+    background: red;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.green{
+    background: green;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.blue{
+    background: blue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.item{
+    margin: 0 30px;
+    padding: 15px 0;
+    font-weight: bold;
+    text-shadow: 1px 1px black;
+}
+
+.show{
+    opacity: 1;
+}
+.hidden{
+    opacity: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: red;
+}

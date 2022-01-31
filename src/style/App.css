@@ -10,3 +10,12 @@
 p{
   text-align: center;
 }
+
+.scoreButton{
+  width: 30px;
+  height: 30px;
+  background-color: red;
+  position: absolute;
+  top: 10px;
+  left: 20px;
+}

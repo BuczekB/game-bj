@@ -11,6 +11,7 @@ import Buttons from './Buttons';
 import PlaceForCards from './PlaceForCards';
 import Card from './Card';
 import WinLoseDraw from './WinLoseDraw';
+import History from './History';
 
 const card = [{ card: '1karo', value: 1 }, { card: '2karo', value: 2 }, { card: '3karo', value: 3 },
 { card: '4karo', value: 4 }, { card: '5karo', value: 5 }, { card: '6karo', value: 6 }, { card: '7karo', value: 7 },
@@ -49,7 +50,12 @@ class App extends Component {
     value: 0,
     active: false,
     winLoseDraw: '',
+    flag: false,
+    historyResult: [],
+    show: 0,
   };
+
+
 
   shufflingCards = () => {
     const newCardList = card.map(card => card);
@@ -60,6 +66,7 @@ class App extends Component {
       newCardList.slice({ number }, 1)
 
     }
+
 
     this.setState({
       cards: cards,
@@ -101,6 +108,8 @@ class App extends Component {
       pointPlayer: valueSum,
     })
   }
+
+
   onlyOneCardDealerAndPoints = () => {
 
     const cards = this.state.cards;
@@ -126,6 +135,7 @@ class App extends Component {
       this.setState({
         money: this.state.money - this.state.value,
         winLoseDraw: 'lose',
+        flag: true,
       })
       setTimeout(this.reset, 2000)
 
@@ -136,8 +146,10 @@ class App extends Component {
     }
     this.setState({
       endGame: true,
+      flag: true,
     })
     setTimeout(this.winLoseDraw, 2000)
+
 
 
   }
@@ -148,6 +160,7 @@ class App extends Component {
         this.setState({
           money: this.state.money + this.state.value,
           winLoseDraw: 'win',
+          flag: true,
         })
         setTimeout(this.reset, 2000)
 
@@ -157,6 +170,7 @@ class App extends Component {
         this.setState({
           money: this.state.money - this.state.value,
           winLoseDraw: 'lose',
+          flag: true,
         })
         setTimeout(this.reset, 2000)
 
@@ -166,6 +180,7 @@ class App extends Component {
         this.setState({
           money: this.state.money + this.state.value,
           winLoseDraw: 'win',
+          flag: true,
         })
         setTimeout(this.reset, 2000)
 
@@ -175,6 +190,7 @@ class App extends Component {
         this.setState({
           money: this.state.money,
           winLoseDraw: 'draw',
+          flag: true,
         })
         setTimeout(this.reset, 2000)
 
@@ -188,11 +204,41 @@ class App extends Component {
     this.setState({
       value: money,
       active: true,
+
     })
     this.shufflingCards()
     console.log(this.state.winLoseDraw);
   }
+
+  results = () => {
+
+    //console.log(this.state.pointPlayer);
+    //console.log(this.state.pointDealer);
+    //console.log(this.state.winLoseDraw);
+
+    const historyTableOne = [this.state.pointPlayer, this.state.pointDealer, this.state.winLoseDraw]
+
+    const historyTableTwo = [historyTableOne, ...this.state.historyResult]
+
+    console.log(historyTableOne);
+    console.log(historyTableTwo);
+
+    this.setState({
+      historyResult: historyTableTwo,
+    })
+
+
+    //console.log(this.state.historyResult);
+
+
+
+  }
+
+
+
   reset = () => {
+
+    this.results()
 
     this.setState({
       cards: [],
@@ -207,17 +253,31 @@ class App extends Component {
       value: 0,
       active: false,
       winLoseDraw: '',
+      flag: false,
     })
 
 
   }
 
+  scoreShow = () => {
 
+    const flag = !this.state.show
+
+    this.setState({
+      show: flag,
+    })
+
+    console.log(flag);
+
+  }
 
 
   render() {
+
     return (
+
       <div className='app'>
+        <div className='scoreButton' onClick={this.scoreShow}></div>
         <Table />
         <PlaceForCards
           firstCards={this.state.firstThirdCards}
@@ -227,6 +287,7 @@ class App extends Component {
         <Value
           choiceValue={this.choiceValue}
           active={this.state.active}
+          flag={this.state.flag}
         />
         <Score
           pointsPlayer={this.state.pointPlayer}
@@ -234,13 +295,18 @@ class App extends Component {
           money={this.state.money}
           value={this.state.value}
         />
-        <Buttons
+        <Buttons className
+          flag={this.state.flag}
           active={this.state.active}
           giveFirstThirdCard={this.onlyOneCardPlayerAndPoints}
           onlyOneCardPlayer={this.pass}
         />
         <WinLoseDraw
           winLoseDraw={this.state.winLoseDraw}
+        />
+        <History
+          show={this.state.show}
+          historyResult={this.state.historyResult}
         />
       </div>
     )

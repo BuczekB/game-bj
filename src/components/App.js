@@ -201,13 +201,39 @@ class App extends Component {
 
   }
   choiceValue = (money) => {
-    this.setState({
-      value: money,
-      active: true,
 
+    if (this.state.money === 0) {
+      alert("no money")
+      this.setState({
+        value: 0,
+      })
+      return
+    }
+
+
+    this.setState({
+      value: this.state.value + money
     })
+
+  }
+  startGame = () => {
+
+    if (this.state.value === 0) {
+      alert("game price is 0")
+      return
+    }
+
+    this.setState({
+      active: true,
+    })
+
     this.shufflingCards()
     console.log(this.state.winLoseDraw);
+  }
+  backMoney = (money) => {
+    this.setState({
+      value: 0
+    })
   }
 
   results = () => {
@@ -286,6 +312,8 @@ class App extends Component {
         />
         <Value
           choiceValue={this.choiceValue}
+          startGame={this.startGame}
+          backMoney={this.backMoney}
           active={this.state.active}
           flag={this.state.flag}
         />

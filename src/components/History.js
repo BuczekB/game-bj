@@ -21,8 +21,8 @@ const History = (props) => {
 
         let showBox = ''
 
-        if (flag) showBox = 'boxOFF'
-        if (!flag) showBox = ''
+        if (!flag) showBox = 'boxOFF'
+        if (flag) showBox = ''
 
 
         if (three == 'win') bg = 'green';

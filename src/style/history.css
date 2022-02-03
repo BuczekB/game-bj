@@ -1,4 +1,11 @@
-
+@keyframes moveToLeft {
+    from {
+        transform: translateX(30vw);
+    }
+    to {
+        transform: translateX(-30vw);
+    }
+}
 
 .historyTable{
     width: 30vw;
@@ -14,7 +21,12 @@
 .boxOFF{
     opacity: 0;
 }
-
+.boxOn{
+    animation-name: moveToLeft;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+    
+}
 
 
 .historyTableOff{

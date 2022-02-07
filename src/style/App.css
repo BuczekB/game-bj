@@ -12,10 +12,42 @@ p{
 }
 
 .scoreButton{
-  width: 30px;
-  height: 30px;
-  background-color: red;
   position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   top: 10px;
-  left: 20px;
+  left: 10px;
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+  transition: all .5s ease-in-out;
+  border: 3px solid rgb(255, 255, 255);
+  
 }
+.btnBurger{
+  width: 22px;
+  height: 3px;
+  background-color: #fff;
+  border-radius: 2px;
+  box-shadow: 0 1px 3px rgba(255, 101, 47, .2);
+  transition: all .5s ease-in-out;
+}
+.btnBurger::after,
+.btnBurger::before{
+  content: '';
+  position: absolute;
+  width: 22px;
+  height: 3px;
+  background-color: #fff;
+  border-radius: 2px;
+
+} 
+.btnBurger::after{
+  transform: translateY(-6px);
+
+}  
+.btnBurger::before{
+  transform: translateY(6px);
+}  
+

@@ -36,6 +36,9 @@ const card = [{ card: '1karo', value: 1 }, { card: '2karo', value: 2 }, { card: 
 
 class App extends Component {
 
+
+
+
   state = {
     cards: [],
     firstThirdCards: [],
@@ -53,6 +56,8 @@ class App extends Component {
     flag: false,
     historyResult: [],
     show: 0,
+    showHistroyButton: 1,
+    historyOn: 'none',
   };
 
 
@@ -262,9 +267,14 @@ class App extends Component {
 
 
 
+
+
+
+
   reset = () => {
 
     this.results()
+
 
     this.setState({
       cards: [],
@@ -280,6 +290,7 @@ class App extends Component {
       active: false,
       winLoseDraw: '',
       flag: false,
+      historyOn: 'flex',
     })
 
 
@@ -298,12 +309,15 @@ class App extends Component {
   }
 
 
+
   render() {
 
     return (
 
       <div className='app'>
-        <div className='scoreButton' onClick={this.scoreShow}></div>
+        <div className='scoreButton' style={{ display: `${this.state.historyOn}` }} onClick={this.scoreShow}  >
+          <span className='btnBurger'></span>
+        </div>
         <Table />
         <PlaceForCards
           firstCards={this.state.firstThirdCards}
@@ -336,7 +350,7 @@ class App extends Component {
           show={this.state.show}
           historyResult={this.state.historyResult}
         />
-      </div>
+      </div >
     )
   }
 

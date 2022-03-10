@@ -1,5 +1,6 @@
-import React, { Component } from 'react';
-import { render } from 'react-dom';
+import React, { useState, useReducer, useEffect, } from 'react';
+import axios from 'axios';
+
 
 
 import '../style/App.css';
@@ -12,6 +13,8 @@ import PlaceForCards from './PlaceForCards';
 import Card from './Card';
 import WinLoseDraw from './WinLoseDraw';
 import History from './History';
+import DataFetching from './DataFetching';
+import { render } from '@testing-library/react';
 
 const card = [{ card: '1karo', value: 1 }, { card: '2karo', value: 2 }, { card: '3karo', value: 3 },
 { card: '4karo', value: 4 }, { card: '5karo', value: 5 }, { card: '6karo', value: 6 }, { card: '7karo', value: 7 },
@@ -34,170 +37,331 @@ const card = [{ card: '1karo', value: 1 }, { card: '2karo', value: 2 }, { card: 
 { card: 'Apik', value: 10 }]
 
 
-class App extends Component {
+const App = () => {
 
 
 
 
-  state = {
-    cards: [],
-    firstThirdCards: [],
-    playerCards: [],
-    dealerCards: [],
-    counter: 0,
-    pointDealer: 0,
-    pointPlayer: 0,
-    addValue: true,
-    endGame: false,
-    money: 1000,
-    value: 0,
-    active: false,
-    winLoseDraw: '',
-    flag: false,
-    historyResult: [],
-    show: 0,
-    showHistroyButton: 1,
-    historyOn: 'none',
-  };
+  const [cards, setCards] = useState([]);
+  const [firstThirdCards, setFirstThirdCards] = useState([]);
+  const [playerCards, setPlayerCards] = useState([]);
+  const [dealerCards, setDealerCards] = useState([]);
+  const [counter, setCounter] = useState(0);
+  const [pointDealer, setPointDealer] = useState(0);
+  const [pointPlayer, setPointPlayer] = useState(0);
+  const [addValue, setAddValue] = useState(true);
+  const [endGame, setEndGame] = useState(false);
+  const [money, setMoney] = useState(1000);
+  const [value, setValue] = useState(0);
+  const [active, setActive] = useState(false);
+  const [winLoseDraw, setWinLoseDraw] = useState('');
+  const [flag, setFlag] = useState(false);
+  const [historyResult, setHistoryResult] = useState([]);
+  const [show, setShow] = useState(0);
+  const [showHistroyButton, setShowHistroyButton] = useState(1);
+  const [historyOn, setHistoryOn] = useState('none');
+  const [cardTest, setCardTest] = useState([]);
+  const [id, setId] = useState('')
+  const [dataCards, setDataCards] = useState([])
+  const [test, setTest] = useState(false)
+  const [testt, setTestt] = useState(false)
+  const [wld, setWLD] = useState(false)
+
+
+  useEffect(() => {
+    axios.get(`https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=6`)
+      .then(res => {
+        setId(res.data.deck_id)
+        setTestt(true)
+      })
 
 
 
-  shufflingCards = () => {
-    const newCardList = card.map(card => card);
-    const cards = [];
-    for (let i = 0; i < newCardList.length; i++) {
-      const number = Math.floor(Math.random() * newCardList.length)
-      cards.push(newCardList[number])
-      newCardList.slice({ number }, 1)
+  }, [])
+
+
+  useEffect(() => {
+
+    axios.get(`https://deckofcardsapi.com/api/deck/${id}/draw/?count=324`)
+
+      .then(res => {
+        const data = res.data.cards
+
+
+        const cardDeck = data.map(item => {
+
+          let value = item.value
+
+
+          switch (value) {
+            case 'JACK':
+              value = 10
+              break;
+            case 'QUEEN':
+              value = 10
+              break;
+            case 'KING':
+              value = 10
+              break;
+            case 'ACE':
+              value = 10
+              break;
+            default:
+              value = value * 1
+
+          }
+
+
+
+
+
+
+          return (
+            {
+              code: item.code,
+              image: item.image,
+              value: value,
+
+            }
+          )
+        })
+
+
+        dataCards.push(cardDeck)
+
+
+
+      })
+      .catch(err => {
+        console.log('error');
+      })
+  }, [testt])
+
+
+
+
+
+
+
+
+
+  const shufflingCards = () => {
+    {
+      const newCardList = dataCards.map(card => card);
+
+
+
+      const cards = [];
+      for (let i = 0; i < newCardList.length; i++) {
+        const number = Math.floor(Math.random() * newCardList.length)
+        cards.push(newCardList[number])
+        newCardList.slice({ number }, 1)
+
+      }
+
+      setCards(card)
 
     }
 
 
-    this.setState({
-      cards: cards,
-    })
 
-    setTimeout(this.giveFirstThirdCard, 500)
+    giveFirstThirdCard()
+    /*setTimeout(giveFirstThirdCard, 500) */
 
   }
-  giveFirstThirdCard = () => {
+  const giveFirstThirdCard = () => {
 
-    const cards = this.state.cards
+
+
+    const cardss = dataCards[0]
+
+
+
     const firstThirdCards = []
-    for (let i = 0; i < 3; i++) {
-      firstThirdCards.push(cards[i])
+    for (let i = counter; i < counter + 3; i++) {
+      firstThirdCards.push(cardss[i])
+
     }
+
+
     const pointsDealer = firstThirdCards[1].value;
     const pointsPlayer = firstThirdCards[0].value + firstThirdCards[2].value;
 
-    this.setState({
-      firstThirdCards: firstThirdCards,
-      counter: 3,
-      pointDealer: pointsDealer,
-      pointPlayer: pointsPlayer,
 
-    })
+    setFirstThirdCards(firstThirdCards)
+    setCounter(counter + 3)
+    setPointDealer(pointsDealer)
+    setPointPlayer(pointsPlayer)
+
+
   }
-  onlyOneCardPlayerAndPoints = (prevState) => {
+  const onlyOneCardPlayerAndPoints = (prevState) => {
 
-    const cards = this.state.cards;
-    const counter = this.state.counter;
-    const playerCards = this.state.playerCards;
-    playerCards.push(cards[counter]);
-    const value = cards[counter].value;
-    const valueSum = value + this.state.pointPlayer;
+    const cardss = dataCards[0];
+    const counterr = counter;
+    const playerCardss = playerCards;
+    playerCardss.push(cardss[counterr]);
+    const value = cardss[counterr].value;
+    const valueSum = value + pointPlayer;
 
-    this.setState({
-      playerCards: [...playerCards],
-      counter: counter + 1,
-      pointPlayer: valueSum,
-    })
+
+    setPlayerCards([...playerCardss])
+    setCounter(counterr + 1)
+    setPointPlayer(valueSum)
+
   }
 
 
-  onlyOneCardDealerAndPoints = () => {
+  const onlyOneCardDealerAndPoints = () => {
 
-    const cards = this.state.cards;
-    let counter = this.state.counter;
-    const dealerCards = this.state.dealerCards;
-    let valueSum = this.state.pointDealer;
+    const cards = dataCards[0];
+    let counterr = counter;
+    const dealerCardss = dealerCards;
+    let valueSum = pointDealer;
     while (valueSum <= 16) {
-      dealerCards.push(cards[counter]);
-      let value = cards[counter].value;
+      dealerCardss.push(cards[counterr]);
+      let value = cards[counterr].value;
       valueSum += value
-      counter += 1;
+      counterr += 1;
     }
 
 
-    this.setState({
-      dealerCards: [...dealerCards],
-      counter: counter + 1,
-      pointDealer: valueSum,
-    })
+
+    setTimeout(winLoseDrawF, 2000)
+
+
+
+    setDealerCards([...dealerCardss])
+    setCounter(counterr + 1)
+    setPointDealer(valueSum)
+
   }
-  pass = () => {
-    if (this.state.pointPlayer > 21) {
-      this.setState({
-        money: this.state.money - this.state.value,
-        winLoseDraw: 'lose',
-        flag: true,
-      })
-      setTimeout(this.reset, 2000)
+  const pass = () => {
+
+
+    if (pointPlayer > 21) {
+
+      setMoney(money - value)
+      setWinLoseDraw('lose')
+      setFlag(true)
+
+
+
+
+      setTimeout(reset, 2000)
 
       return
     }
-    if (this.state.pointPlayer < 22) {
-      this.onlyOneCardDealerAndPoints()
-    }
-    this.setState({
-      endGame: true,
-      flag: true,
-    })
-    setTimeout(this.winLoseDraw, 2000)
+    if (pointPlayer < 22) {
 
+
+      setEndGame(true)
+
+      setFlag(true)
+
+      setTest(true)
+
+
+
+    }
 
 
   }
-  winLoseDraw = () => {
-    if (this.state.endGame) {
-      if (this.state.pointDealer > 21) {
 
-        this.setState({
-          money: this.state.money + this.state.value,
-          winLoseDraw: 'win',
-          flag: true,
-        })
-        setTimeout(this.reset, 2000)
+  useEffect(() => {
+
+    if (endGame) {
+      const cards = dataCards[0];
+      let counterr = counter;
+      const dealerCardss = dealerCards;
+      let valueSum = pointDealer;
+      while (valueSum <= 16) {
+        dealerCardss.push(cards[counterr]);
+        let value = cards[counterr].value;
+        valueSum += value
+        counterr += 1;
+      }
+
+
+
+      /*setTimeout(winLoseDrawF, 2000)*/
+
+
+      setWLD(true)
+
+      setDealerCards([...dealerCardss])
+      setCounter(counterr + 1)
+      setPointDealer(valueSum)
+
+    }
+
+
+  }, [test])
+
+  useEffect(() => {
+    winLoseDrawF()
+  }, [wld])
+
+
+
+
+
+
+  const winLoseDrawF = () => {
+
+
+    setWLD(false)
+
+    if (endGame) {
+      console.log(pointDealer, 'pointDealer');
+      if (pointDealer > 21) {
+
+
+        setMoney(money + (value / 2))
+        setWinLoseDraw('win')
+        setFlag(true)
+
+
+
+
+        setTimeout(reset, 2000)
 
         return
       }
-      if (this.state.pointDealer > this.state.pointPlayer) {
-        this.setState({
-          money: this.state.money - this.state.value,
-          winLoseDraw: 'lose',
-          flag: true,
-        })
-        setTimeout(this.reset, 2000)
+
+      if (pointDealer > pointPlayer) {
+
+        setMoney(money - (value / 2))
+        setWinLoseDraw('lose')
+        setFlag(true)
+
+
+
+        setTimeout(reset, 2000)
 
         return
       }
-      if (this.state.pointDealer < this.state.pointPlayer) {
-        this.setState({
-          money: this.state.money + this.state.value,
-          winLoseDraw: 'win',
-          flag: true,
-        })
-        setTimeout(this.reset, 2000)
+      if (pointDealer < pointPlayer) {
+
+        setMoney(money + (value / 2))
+        setWinLoseDraw('win')
+        setFlag(true)
+
+
+
+        setTimeout(reset, 2000)
 
         return
       }
-      if (this.state.pointDealer === this.state.pointPlayer) {
-        this.setState({
-          money: this.state.money,
-          winLoseDraw: 'draw',
-          flag: true,
-        })
-        setTimeout(this.reset, 2000)
+      if (pointDealer === pointPlayer) {
+
+        setMoney(money)
+        setWinLoseDraw('draw')
+        setFlag(true)
+
+
+
+        setTimeout(reset, 2000)
 
 
         return
@@ -205,61 +369,57 @@ class App extends Component {
     }
 
   }
-  choiceValue = (money) => {
+  const choiceValue = (money) => {
 
-    if (this.state.money === 0) {
+    if (money === 0) {
       alert("no money")
-      this.setState({
-        value: 0,
-      })
+
+      setValue(0)
+
       return
     }
 
 
-    this.setState({
-      value: this.state.value + money
-    })
+
+    setValue(value + money)
+
 
   }
-  startGame = () => {
+  const startGame = () => {
 
-    if (this.state.value === 0) {
+    if (value === 0) {
       alert("game price is 0")
       return
     }
 
-    this.setState({
-      active: true,
-    })
 
-    this.shufflingCards()
-    console.log(this.state.winLoseDraw);
+    setActive(true)
+
+    giveFirstThirdCard()
+    /*shufflingCards()*/
+
   }
-  backMoney = (money) => {
-    this.setState({
-      value: 0
-    })
+  const backMoney = (money) => {
+
+    setValue(0)
+
   }
 
-  results = () => {
-
-    //console.log(this.state.pointPlayer);
-    //console.log(this.state.pointDealer);
-    //console.log(this.state.winLoseDraw);
-
-    const historyTableOne = [this.state.pointPlayer, this.state.pointDealer, this.state.winLoseDraw]
-
-    const historyTableTwo = [historyTableOne, ...this.state.historyResult]
-
-    console.log(historyTableOne);
-    console.log(historyTableTwo);
-
-    this.setState({
-      historyResult: historyTableTwo,
-    })
+  const results = () => {
 
 
-    //console.log(this.state.historyResult);
+
+    const historyTableOne = [pointPlayer, pointDealer, winLoseDraw]
+
+    const historyTableTwo = [historyTableOne, ...historyResult]
+
+
+
+
+    setHistoryResult(historyTableTwo)
+
+
+
 
 
 
@@ -271,88 +431,110 @@ class App extends Component {
 
 
 
-  reset = () => {
 
-    this.results()
+  const reset = () => {
 
 
-    this.setState({
-      cards: [],
-      firstThirdCards: [],
-      playerCards: [],
-      dealerCards: [],
-      counter: 0,
-      pointDealer: 0,
-      pointPlayer: 0,
-      addValue: true,
-      endGame: false,
-      value: 0,
-      active: false,
-      winLoseDraw: '',
-      flag: false,
-      historyOn: 'flex',
-    })
+
+
+
+    results()
+
+    setCards([])
+    setFirstThirdCards([])
+    setPlayerCards([])
+    setDealerCards([])
+
+    setPointDealer(0)
+    setPointPlayer(0)
+    setAddValue(true)
+    setEndGame(false)
+    setValue(0)
+    setActive(false)
+    setWinLoseDraw('')
+    setFlag(false)
+    setHistoryOn('flex')
+    setTest(false)
 
 
   }
 
-  scoreShow = () => {
+  const scoreShow = () => {
 
-    const flag = !this.state.show
+    const flag = !show
 
-    this.setState({
-      show: flag,
-    })
 
-    console.log(flag);
+    setShow(flag)
+
+
+
+  }
+
+
+  const oneCard = (item) => {
+
+
+
+
+    setCardTest(item)
+
+
+
 
   }
 
 
 
-  render() {
 
-    return (
 
-      <div className='app'>
-        <div className='scoreButton' style={{ display: `${this.state.historyOn}` }} onClick={this.scoreShow}  >
-          <span className='btnBurger'></span>
-        </div>
-        <Table />
-        <PlaceForCards
-          firstCards={this.state.firstThirdCards}
-          playerCards={this.state.playerCards}
-          dealerCards={this.state.dealerCards}
-        />
-        <Value
-          choiceValue={this.choiceValue}
-          startGame={this.startGame}
-          backMoney={this.backMoney}
-          active={this.state.active}
-          flag={this.state.flag}
-        />
-        <Score
-          pointsPlayer={this.state.pointPlayer}
-          pointsDealer={this.state.pointDealer}
-          money={this.state.money}
-          value={this.state.value}
-        />
-        <Buttons className
-          flag={this.state.flag}
-          active={this.state.active}
-          giveFirstThirdCard={this.onlyOneCardPlayerAndPoints}
-          onlyOneCardPlayer={this.pass}
-        />
-        <WinLoseDraw
-          winLoseDraw={this.state.winLoseDraw}
-        />
-        <History
-          show={this.state.show}
-          historyResult={this.state.historyResult}
-        />
-      </div >
-    )
-  }
+
+
+  return (
+
+    <div className='app'>
+      <div className='scoreButton' style={{ display: `${historyOn}` }} onClick={scoreShow}  >
+        <span className='btnBurger'></span>
+      </div>
+      <Table>
+      </Table>
+      <DataFetching
+        oneCard={oneCard}
+      >
+      </DataFetching>
+      <PlaceForCards
+        firstThirdCards={firstThirdCards}
+        playerCards={playerCards}
+        dealerCards={dealerCards}
+      />
+      <Value
+        choiceValue={choiceValue}
+        startGame={startGame}
+        backMoney={backMoney}
+        active={active}
+        flag={flag}
+      />
+      <Score
+        pointsPlayer={pointPlayer}
+        pointsDealer={pointDealer}
+        money={money}
+        value={value}
+      />
+      <Buttons className
+        flag={flag}
+        active={active}
+        giveFirstThirdCard={onlyOneCardPlayerAndPoints}
+        pass={pass}
+      />
+      <WinLoseDraw
+        winLoseDraw={winLoseDraw}
+      />
+      <History
+        show={show}
+        historyResult={historyResult}
+      />
+    </div >
+  )
+
 
 
 }

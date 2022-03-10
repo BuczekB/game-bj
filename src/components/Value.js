@@ -34,7 +34,7 @@ const Value = (props) => {
                 <div className='value' onClick={value25}><p>25$</p></div>
                 <div className='value' onClick={value100}><p>100$</p></div>
                 <div className='playButton' onClick={props.startGame}>Play</div>
-                <div className='backButton' onClick={props.backMoney} >Reset Value</div>
+                <div className='backButton' onClick={props.backMoney} >Reset Bet</div>
             </div>
 
 

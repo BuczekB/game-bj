@@ -3,12 +3,16 @@ import '../style/card.css'
 
 const Card = (props) => {
 
+
+
     if (true) {
 
 
         return (
             <div className='card'>
-                {props.card}
+
+                <img src={props.card}></img>
+
             </div>
         )
     }

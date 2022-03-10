@@ -3,19 +3,29 @@ import '../style/placeForCards.css'
 import Card from './Card';
 const PlaceForCards = (props) => {
 
-    const playerCards = props.playerCards.map(card => (
-        <Card key={card.card} card={card.card} />
+    const playerCardss = props.playerCards.map(card => (
+        <Card key={card.card} card={card.image} />
     ))
 
-    const dealerCards = props.dealerCards.map(card => (
-        <Card key={card.card} card={card.card} />
+    const dealerCardss = props.dealerCards.map(card => (
+        <Card key={card.card} card={card.image} />
     ))
 
-    const cardListP = props.firstCards.map(card => (
-        <Card key={card.card} card={card.card} />
 
 
+    const firstCardss = props.firstThirdCards.map(card => (
+        <Card key={card.code} card={card.image}>
+
+        </Card>
     ))
+
+
+
+
+
+
+
+    {/*props.addData(firstThirdCardss, playerCardss, dealerCardss)*/ }
 
 
 
@@ -23,15 +33,16 @@ const PlaceForCards = (props) => {
     return (
         <div className='cards'>
             <div className='CardsForPlayer'>
-                {cardListP[0]}
-                {cardListP[2]}
-                {playerCards}
+                {firstCardss[0]}
+                {firstCardss[2]}
+                {playerCardss}
+
 
 
             </div>
             <div className='CardsForDealer'>
-                {cardListP[1]}
-                {dealerCards}
+                {firstCardss[1]}
+                {dealerCardss}
 
             </div>
         </div>

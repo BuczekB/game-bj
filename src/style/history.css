@@ -9,19 +9,23 @@
 
 .historyTable{
     width: 30vw;
-    height: 100vh;
+    height: 50vh;
     position: absolute;
     right: 0;
     top: 0;
     overflow-y: scroll;
+    overflow-x: hidden;
     opacity: 1;
+
     
 }
 
 .boxOFF{
     opacity: 0;
+   
 }
 .boxOn{
+    
     animation-name: moveToLeft;
     animation-duration: 1s;
     animation-fill-mode: forwards;
@@ -31,7 +35,7 @@
 
 .historyTableOff{
     width: 30vw;
-    height: 100vh;
+    height: 50vh;
     background-color: rgba(128, 128, 128, 0.5);
     position: absolute;
     right: 0;

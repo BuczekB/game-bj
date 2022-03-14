@@ -25,7 +25,7 @@ const PlaceForCards = (props) => {
 
 
 
-    {/*props.addData(firstThirdCardss, playerCardss, dealerCardss)*/ }
+
 
 
 

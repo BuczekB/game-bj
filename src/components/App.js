@@ -3,6 +3,7 @@ import axios from 'axios';
 
 
 
+
 import '../style/App.css';
 
 import Table from './Table';
@@ -66,6 +67,7 @@ const App = () => {
   const [test, setTest] = useState(false)
   const [testt, setTestt] = useState(false)
   const [wld, setWLD] = useState(false)
+  const [work, setWork] = useState(false)
 
 
   useEffect(() => {
@@ -172,7 +174,7 @@ const App = () => {
   const giveFirstThirdCard = () => {
 
 
-
+    console.log(dataCards[0]);
     const cardss = dataCards[0]
 
 
@@ -195,8 +197,12 @@ const App = () => {
 
 
   }
-  const onlyOneCardPlayerAndPoints = (prevState) => {
 
+  
+  
+  const onlyOneCardPlayerAndPoints =  (prevState) => {
+    
+    
     const cardss = dataCards[0];
     const counterr = counter;
     const playerCardss = playerCards;
@@ -204,11 +210,60 @@ const App = () => {
     const value = cardss[counterr].value;
     const valueSum = value + pointPlayer;
 
+    console.log(valueSum);
+    if (valueSum > 21){
+      setPointPlayer(valueSum)
+      
+      const test = true
 
+      results(valueSum, test)
+      pass1(valueSum)
+      
+    
+      return  
+      
+    }
+    
+    
     setPlayerCards([...playerCardss])
     setCounter(counterr + 1)
     setPointPlayer(valueSum)
 
+  }
+
+  const pass1 = (valueSum) =>{
+    
+    setWinLoseDraw('lose')
+      setMoney(money - value)
+      
+      setFlag(true)
+      
+      
+
+
+     
+      
+      
+
+      
+      setTimeout(() => {
+        reset(valueSum)
+        
+        
+        
+      }, 3000);
+    
+    
+
+
+  }
+
+  
+
+  const testing = ( ) =>{
+    console.log('works');
+    console.log(pointPlayer,'works Points');
+    
   }
 
 
@@ -229,7 +284,7 @@ const App = () => {
 
     setTimeout(winLoseDrawF, 2000)
 
-
+    
 
     setDealerCards([...dealerCardss])
     setCounter(counterr + 1)
@@ -237,22 +292,27 @@ const App = () => {
 
   }
   const pass = () => {
+    
+    
 
-
-    if (pointPlayer > 21) {
+    if (pointPlayer  > 21) {
 
       setMoney(money - value)
       setWinLoseDraw('lose')
       setFlag(true)
+      
 
 
 
+      
 
-      setTimeout(reset, 2000)
+      setTimeout((pointPlayer) => {
+        reset(pointPlayer)
+      }, 3000);
 
       return
     }
-    if (pointPlayer < 22) {
+    if (pointPlayer  < 22) {
 
 
       setEndGame(true)
@@ -261,7 +321,7 @@ const App = () => {
 
       setTest(true)
 
-
+      
 
     }
 
@@ -309,47 +369,58 @@ const App = () => {
 
   const winLoseDrawF = () => {
 
-
     setWLD(false)
+    
 
     if (endGame) {
       console.log(pointDealer, 'pointDealer');
       if (pointDealer > 21) {
 
-
+      console.log('wariant 1');
         setMoney(money + (value / 2))
         setWinLoseDraw('win')
         setFlag(true)
 
-
-
-
-        setTimeout(reset, 2000)
+        
+        
+        results(pointPlayer)
+        setTimeout((pointPlayer) => {
+          reset(pointPlayer)
+        }, 3000);
 
         return
       }
 
       if (pointDealer > pointPlayer) {
 
+        console.log('wariant 2');
+
         setMoney(money - (value / 2))
         setWinLoseDraw('lose')
         setFlag(true)
 
+        results(pointPlayer)
 
-
-        setTimeout(reset, 2000)
+        setTimeout((pointPlayer) => {
+          reset(pointPlayer)
+        }, 3000);
 
         return
       }
       if (pointDealer < pointPlayer) {
 
+
+        console.log('wariant 3');
         setMoney(money + (value / 2))
         setWinLoseDraw('win')
+       
         setFlag(true)
 
+        results(pointPlayer)
 
-
-        setTimeout(reset, 2000)
+        setTimeout((pointPlayer) => {
+          reset(pointPlayer)
+        }, 3000);
 
         return
       }
@@ -359,13 +430,16 @@ const App = () => {
         setWinLoseDraw('draw')
         setFlag(true)
 
+        results(pointPlayer)
 
-
-        setTimeout(reset, 2000)
+        setTimeout((pointPlayer) => {
+          reset(pointPlayer)
+        }, 3000);
 
 
         return
       }
+      return
     }
 
   }
@@ -405,11 +479,23 @@ const App = () => {
 
   }
 
-  const results = () => {
+  const results = (valueSum, test) => {
 
+    console.log(test,'results dziala');
 
+    let winLoseDrawCorect = winLoseDraw
 
-    const historyTableOne = [pointPlayer, pointDealer, winLoseDraw]
+    if(winLoseDraw || test){  
+
+      if(test){
+        winLoseDrawCorect = 'lose'
+      }
+
+    console.log(valueSum, 'info');
+    console.log(pointDealer, 'info');
+    console.log(winLoseDraw, 'infoWLD');
+
+    const historyTableOne = [valueSum, pointDealer, winLoseDrawCorect]
 
     const historyTableTwo = [historyTableOne, ...historyResult]
 
@@ -418,7 +504,7 @@ const App = () => {
 
     setHistoryResult(historyTableTwo)
 
-
+  }
 
 
 
@@ -432,13 +518,13 @@ const App = () => {
 
 
 
-  const reset = () => {
+  const reset  =  (e) => {
+
+    console.log(e,'dziala reset');
 
 
 
-
-
-    results()
+     
 
     setCards([])
     setFirstThirdCards([])
@@ -455,6 +541,7 @@ const App = () => {
     setFlag(false)
     setHistoryOn('flex')
     setTest(false)
+   
 
 
   }

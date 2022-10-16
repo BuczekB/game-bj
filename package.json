@@ -17,7 +17,13 @@
     "deploy": "main -d build",
     "build": "react-scripts build",
     "test": "react-scripts test",
+<<<<<<< HEAD
     "eject": "react-scripts eject"
+=======
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages-d build"
+>>>>>>> main
   },
   "eslintConfig": {
     "extends": "react-app"

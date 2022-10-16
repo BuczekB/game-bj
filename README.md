@@ -4,7 +4,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## BLACKJACK RULES
 
-The goal of BJ is to amount your card values as near to 21 as possible without exceeding or 'busting' it.
+The goal of BJ is to amount your card values as near to 21 as possible without exceeding or 'busting' it..
 
 ## Available Scripts
 

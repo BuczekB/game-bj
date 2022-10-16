@@ -1,8 +1,8 @@
 {
+  "homepage":"https://BuczekB.github.io/game-bj",
   "name": "game-bj",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://BuczekB.github.io/game-bj",
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/user-event": "^7.2.1",
@@ -13,11 +13,11 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "predeploy": "npm run build",
+    "deploy": "main -d build",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": "react-app"

@@ -560,9 +560,6 @@ const App = () => {
 
   const oneCard = (item) => {
 
-
-
-
     setCardTest(item)
 
 
